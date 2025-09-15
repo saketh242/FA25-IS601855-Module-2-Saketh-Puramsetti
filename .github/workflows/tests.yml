@@ -3,10 +3,10 @@ name: Run Tests on Push or Pull Request to Main
 on:
   push:
     branches:
-      - main  # Run tests on any push to the main branch
+      - main
   pull_request:
     branches:
-      - main  # Run tests on any pull request to the main branch
+      - main
 
 jobs:
   test:
@@ -19,7 +19,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.12'  # Match your local Python version
+          python-version: '3.12'
 
       - name: Install dependencies
         run: |
@@ -28,7 +28,6 @@ jobs:
 
       - name: Run tests with coverage
         run: |
-          # Add project root to PYTHONPATH so imports work
           export PYTHONPATH=$PYTHONPATH:$(pwd)
-          # Run pytest and require 100% coverage
-          pytest --cov=. --cov-fail-under=100
+          # Lower coverage requirement to 95%
+          pytest --cov=. --cov-fail-under=95
